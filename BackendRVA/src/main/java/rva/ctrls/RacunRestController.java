@@ -21,7 +21,7 @@ import rva.jpa.Racun;
 import rva.repository.RacunRepository;
 
 @CrossOrigin
-@Api(tags = {"Račun CRUD operacije"})
+@Api(tags = {"RaÄ�un CRUD operacije"})
 @RestController
 public class RacunRestController {
 
@@ -31,26 +31,27 @@ public class RacunRestController {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	@ApiOperation(value = "Vraća kolekciju svih računa iz baze podataka")
+	@ApiOperation(value = "VraÄ‡a kolekciju svih raÄ�una iz baze podataka")
 	@GetMapping("racun")
 	public Collection<Racun> getRacuni() {
 		return racunRepository.findAll();
 	}
 	
-	@ApiOperation(value = "Vraća račun iz baze podataka čiji je id vrednost prosleđena kao path varijabla")
+	@ApiOperation(value = "VraÄ‡a raÄ�un iz baze podataka Ä�iji je id vrednost prosleÄ‘ena kao path varijabla")
 	@GetMapping("racun/{id}")
 	public Racun getRacun(@PathVariable("id") Integer id) {
 		return racunRepository.getOne(id);
 	}
 	
-	@ApiOperation(value = "Vraća kolekciju svih računa iz baze podataka čiji načini plaćanja sadrže string prosleđen kao path varijabla")
+	@ApiOperation(value = "VraÄ‡a kolekciju svih raÄ�una iz baze podataka Ä�iji naÄ�ini plaÄ‡anja sadrÅ¾e string prosleÄ‘en kao path varijabla")
 	@GetMapping("racunNacinPlacanja/{nacinPlacanja}")
 	public Collection<Racun> getByNacinPlacanja(@PathVariable("nacinPlacanja") String nacinPlacanja){
 		return racunRepository.findByNacinPlacanjaContainingIgnoreCase(nacinPlacanja);
 	}
 	
-	@ApiOperation(value = "Upisuje račun u bazu podataka")
+	@ApiOperation(value = "Upisuje raÄ�un u bazu podataka")
 	@PostMapping("racun")
+	@CrossOrigin
 	public ResponseEntity<Racun> insertracun(@RequestBody Racun racun){
 		if(!racunRepository.existsById(racun.getId())) {
 			racunRepository.save(racun);
@@ -60,8 +61,9 @@ public class RacunRestController {
 		}
 	}
 	
-	@ApiOperation(value = "Modifikuje postojeći račun u bazi podataka")
+	@ApiOperation(value = "Modifikuje postojeÄ‡i raÄ�un u bazi podataka")
 	@PutMapping("racun")
+	@CrossOrigin
 	public ResponseEntity<Racun> updateRacun(@RequestBody Racun racun){
 		if(racunRepository.existsById(racun.getId())){
 			racunRepository.save(racun);
@@ -71,8 +73,9 @@ public class RacunRestController {
 		}
 	}
 	
-	@ApiOperation(value = "Briše račun iz baze podataka čiji je id vrednost prosleđena kao path varijabla")
+	@ApiOperation(value = "BriÅ¡e raÄ�un iz baze podataka Ä�iji je id vrednost prosleÄ‘ena kao path varijabla")
 	@DeleteMapping("racun/{id}")
+	@CrossOrigin
 	public ResponseEntity<Racun> deleteRacun(@PathVariable Integer id){
 		if(racunRepository.existsById(id)) {
 			racunRepository.deleteById(id);

@@ -25,7 +25,7 @@ import rva.repository.ProizvodRepository;
 import rva.repository.StavkaRacunaRepository;
 
 @CrossOrigin
-@Api(tags = {"Stavka računa CRUD operacije"})
+@Api(tags = {"Stavka raÄ�una CRUD operacije"})
 @RestController
 public class StavkaRacunaRestController {
 
@@ -39,39 +39,40 @@ public class StavkaRacunaRestController {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	@ApiOperation(value = "Vraća kolekciju svih stavki računa iz baze podataka")
+	@ApiOperation(value = "VraÄ‡a kolekciju svih stavki raÄ�una iz baze podataka")
 	@GetMapping("stavkaRacuna")
 	public Collection<StavkaRacuna> getStavkeRacuna(){
 		return stavkaRacunaRepository.findAll();
 	}
 	
-	@ApiOperation(value = "Vraća stavku računa iz baze podataka čiji je id vrednost prosleđena kao path varijabla")
+	@ApiOperation(value = "VraÄ‡a stavku raÄ�una iz baze podataka Ä�iji je id vrednost prosleÄ‘ena kao path varijabla")
 	@GetMapping("stavkaRacuna/{id}")
 	public StavkaRacuna getStavkaRacuna(@PathVariable("id") Integer id) {
 		return stavkaRacunaRepository.getOne(id);
 	}
 	
-	@ApiOperation(value = "Vraća kolekciju svih stavki računa iz baze podataka koji u jedinici mere sadrže string prosleđen kao path varijabla")
+	@ApiOperation(value = "VraÄ‡a kolekciju svih stavki raÄ�una iz baze podataka koji u jedinici mere sadrÅ¾e string prosleÄ‘en kao path varijabla")
 	@GetMapping("stavkeRacunaJedinicaMere/{jedinicaMere}")
 	public Collection<StavkaRacuna> getStavkaRacunaByJedinicaMere(@PathVariable("jedinicaMere") String jedinicaMere){
 		return stavkaRacunaRepository.findByJedinicaMereIgnoreCase(jedinicaMere);
 	}
 	
-	@ApiOperation(value = "Vraća kolekciju stavki računa iz baze podataka na osnovu proizvoda čija je id vrednost prosleđena kao path varijabla")
+	@ApiOperation(value = "VraÄ‡a kolekciju stavki raÄ�una iz baze podataka na osnovu proizvoda Ä�ija je id vrednost prosleÄ‘ena kao path varijabla")
 	@GetMapping("stavkeRacunaByProizvodId/{id}")
 	public Collection<StavkaRacuna> getStavkeRacunaByProizvodId(@PathVariable("id") Integer id){
 		Proizvod p = proizvodRepository.getOne(id);
 		return stavkaRacunaRepository.findByProizvod(p);
 	}
 	
-	@ApiOperation(value = "Vraća kolekciju stavki računa iz baze podataka na osnovu cene čija je vrednost prosleđena kao path varijabla")
+	@ApiOperation(value = "VraÄ‡a kolekciju stavki raÄ�una iz baze podataka na osnovu cene Ä�ija je vrednost prosleÄ‘ena kao path varijabla")
 	@GetMapping("stavkeRacunaByCena/{cena}")
 	public Collection<StavkaRacuna> getStavkeRacunaByCena(@PathVariable("cena") BigDecimal cena){
 		return stavkaRacunaRepository.findByCenaLessThanOrderById(cena);
 	}
 	
-	@ApiOperation(value = "Upisuje stavku računa u bazu podataka")
+	@ApiOperation(value = "Upisuje stavku raÄ�una u bazu podataka")
 	@PostMapping("stavkaRacuna")
+	@CrossOrigin
 	public ResponseEntity<StavkaRacuna> insertStavkaRacuna(@RequestBody StavkaRacuna stavkaRacuna){
 		if(!stavkaRacunaRepository.existsById(stavkaRacuna.getId())) {
 			stavkaRacuna.setRedniBroj(stavkaRacunaRepository.nextRbr(stavkaRacuna.getProizvod().getId()));
@@ -82,8 +83,9 @@ public class StavkaRacunaRestController {
 		}
 	}
 	
-	@ApiOperation(value = "Modifikuje postojeću stavku računa u bazi podataka")
+	@ApiOperation(value = "Modifikuje postojeÄ‡u stavku raÄ�una u bazi podataka")
 	@PutMapping("stavkaRacuna")
+	@CrossOrigin
 	public ResponseEntity<StavkaRacuna> updateStavkaRacuna(@RequestBody StavkaRacuna stavkaRacuna){
 		if(stavkaRacunaRepository.existsById(stavkaRacuna.getId())) {
 			stavkaRacunaRepository.save(stavkaRacuna);
@@ -93,8 +95,9 @@ public class StavkaRacunaRestController {
 		}
 	}
 	
-	@ApiOperation(value = "Briše stavku računa iz baze podataka čiji je id vrednost prosleđena kao path varijabla")
+	@ApiOperation(value = "BriÅ¡e stavku raÄ�una iz baze podataka Ä�iji je id vrednost prosleÄ‘ena kao path varijabla")
 	@DeleteMapping("stavkaRacuna/{id}")
+	@CrossOrigin
 	public ResponseEntity<StavkaRacuna> deleteStavkaRacuna(@PathVariable Integer id){
 		if(stavkaRacunaRepository.existsById(id)) {
 			stavkaRacunaRepository.deleteById(id);

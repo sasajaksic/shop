@@ -38,25 +38,25 @@ public class ProizvodRestController {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	@ApiOperation(value = "Vraća kolekciju svih proizvoda iz baze podataka")
+	@ApiOperation(value = "VraÄ‡a kolekciju svih proizvoda iz baze podataka")
 	@GetMapping("proizvodi")
 	public Collection<Proizvod> getProizvodi() {
 		return proizvodRepository.findAll();
 	}
 	
-	@ApiOperation(value = "Vraća proizvode iz baze podataka čiji je id vrednost prosleđena kao path varijabla")
+	@ApiOperation(value = "VraÄ‡a proizvode iz baze podataka Ä�iji je id vrednost prosleÄ‘ena kao path varijabla")
 	@GetMapping("proizvod/{id}")
 	public Proizvod getProizvod(@PathVariable("id") Integer id) {
 		return proizvodRepository.getOne(id);
 	}
 	
-	@ApiOperation(value = "Vraća kolekciju svih proizvoda iz baze podataka koji u nazivu sadrže string prosleđen kao path varijabla")
+	@ApiOperation(value = "VraÄ‡a kolekciju svih proizvoda iz baze podataka koji u nazivu sadrÅ¾e string prosleÄ‘en kao path varijabla")
 	@GetMapping("proizvodiNaziv/{naziv}")
 	public Collection<Proizvod> getProizvodByNaziv(@PathVariable("naziv") String naziv){
 		return proizvodRepository.findByNazivContainingIgnoreCase(naziv);
 	}
 	
-	@ApiOperation(value = "Vraća kolekciju proizvoda iz baze podataka na osnovu proizvodjača čija je id vrednost prosleđena kao path varijabla")
+	@ApiOperation(value = "VraÄ‡a kolekciju proizvoda iz baze podataka na osnovu proizvodjaÄ�a Ä�ija je id vrednost prosleÄ‘ena kao path varijabla")
 	@GetMapping("proizvodiByProizvodjacId/{id}")
 	public Collection<Proizvod> getProizvodByProizvodjacId(@PathVariable("id") Integer id){
 		Proizvodjac p = proizvodjacRepository.getOne(id);
@@ -65,6 +65,7 @@ public class ProizvodRestController {
 	
 	@ApiOperation(value = "Upisuje proizvod u bazu podataka")
 	@PostMapping("proizvod")
+	@CrossOrigin
 	public ResponseEntity<Proizvod> insertProizvod(@RequestBody Proizvod proizvod){
 		if(!proizvodRepository.existsById(proizvod.getId())) {
 			proizvodRepository.save(proizvod);
@@ -74,8 +75,9 @@ public class ProizvodRestController {
 		}
 	}
 	
-	@ApiOperation(value = "Modifikuje postojeći proizvod u bazi podataka")
+	@ApiOperation(value = "Modifikuje postojeÄ‡i proizvod u bazi podataka")
 	@PutMapping("proizvod")
+	@CrossOrigin
 	public ResponseEntity<Proizvod> updateProizvod(@RequestBody Proizvod proizvod){
 		if(proizvodRepository.existsById(proizvod.getId())){
 			proizvodRepository.save(proizvod);
@@ -86,8 +88,9 @@ public class ProizvodRestController {
 	}
 
 	@Transactional
-	@ApiOperation(value = "Briše proizvoda iz baze podataka čiji je id vrednost prosleđena kao path varijabla")
+	@ApiOperation(value = "BriÅ¡e proizvoda iz baze podataka Ä�iji je id vrednost prosleÄ‘ena kao path varijabla")
 	@DeleteMapping("proizvod/{id}")
+	@CrossOrigin
 	public ResponseEntity<Proizvod> deleteProizvod(@PathVariable Integer id){
 		if(proizvodRepository.existsById(id)) {
 			proizvodRepository.deleteById(id);
