@@ -24,9 +24,10 @@ import rva.jpa.StavkaRacuna;
 import rva.repository.ProizvodRepository;
 import rva.repository.StavkaRacunaRepository;
 
-@CrossOrigin
+
 @Api(tags = {"Stavka raÄ�una CRUD operacije"})
 @RestController
+@CrossOrigin
 public class StavkaRacunaRestController {
 
 	
@@ -72,7 +73,6 @@ public class StavkaRacunaRestController {
 	
 	@ApiOperation(value = "Upisuje stavku raÄ�una u bazu podataka")
 	@PostMapping("stavkaRacuna")
-	@CrossOrigin
 	public ResponseEntity<StavkaRacuna> insertStavkaRacuna(@RequestBody StavkaRacuna stavkaRacuna){
 		if(!stavkaRacunaRepository.existsById(stavkaRacuna.getId())) {
 			stavkaRacuna.setRedniBroj(stavkaRacunaRepository.nextRbr(stavkaRacuna.getProizvod().getId()));
@@ -85,7 +85,6 @@ public class StavkaRacunaRestController {
 	
 	@ApiOperation(value = "Modifikuje postojeÄ‡u stavku raÄ�una u bazi podataka")
 	@PutMapping("stavkaRacuna")
-	@CrossOrigin
 	public ResponseEntity<StavkaRacuna> updateStavkaRacuna(@RequestBody StavkaRacuna stavkaRacuna){
 		if(stavkaRacunaRepository.existsById(stavkaRacuna.getId())) {
 			stavkaRacunaRepository.save(stavkaRacuna);
@@ -97,7 +96,6 @@ public class StavkaRacunaRestController {
 	
 	@ApiOperation(value = "BriÅ¡e stavku raÄ�una iz baze podataka Ä�iji je id vrednost prosleÄ‘ena kao path varijabla")
 	@DeleteMapping("stavkaRacuna/{id}")
-	@CrossOrigin
 	public ResponseEntity<StavkaRacuna> deleteStavkaRacuna(@PathVariable Integer id){
 		if(stavkaRacunaRepository.existsById(id)) {
 			stavkaRacunaRepository.deleteById(id);

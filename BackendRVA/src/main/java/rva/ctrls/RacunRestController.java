@@ -20,9 +20,10 @@ import io.swagger.annotations.ApiOperation;
 import rva.jpa.Racun;
 import rva.repository.RacunRepository;
 
-@CrossOrigin
+
 @Api(tags = {"RaÄ�un CRUD operacije"})
 @RestController
+@CrossOrigin
 public class RacunRestController {
 
 	@Autowired
@@ -51,7 +52,6 @@ public class RacunRestController {
 	
 	@ApiOperation(value = "Upisuje raÄ�un u bazu podataka")
 	@PostMapping("racun")
-	@CrossOrigin
 	public ResponseEntity<Racun> insertracun(@RequestBody Racun racun){
 		if(!racunRepository.existsById(racun.getId())) {
 			racunRepository.save(racun);
@@ -63,7 +63,6 @@ public class RacunRestController {
 	
 	@ApiOperation(value = "Modifikuje postojeÄ‡i raÄ�un u bazi podataka")
 	@PutMapping("racun")
-	@CrossOrigin
 	public ResponseEntity<Racun> updateRacun(@RequestBody Racun racun){
 		if(racunRepository.existsById(racun.getId())){
 			racunRepository.save(racun);
@@ -75,7 +74,6 @@ public class RacunRestController {
 	
 	@ApiOperation(value = "BriÅ¡e raÄ�un iz baze podataka Ä�iji je id vrednost prosleÄ‘ena kao path varijabla")
 	@DeleteMapping("racun/{id}")
-	@CrossOrigin
 	public ResponseEntity<Racun> deleteRacun(@PathVariable Integer id){
 		if(racunRepository.existsById(id)) {
 			racunRepository.deleteById(id);

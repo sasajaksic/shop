@@ -24,9 +24,9 @@ import rva.jpa.Proizvodjac;
 import rva.repository.ProizvodRepository;
 import rva.repository.ProizvodjacRepository;
 
-@CrossOrigin
 @Api(tags = {"Proizvod CRUD operacije"})
 @RestController
+@CrossOrigin
 public class ProizvodRestController {
 	
 	@Autowired
@@ -65,7 +65,6 @@ public class ProizvodRestController {
 	
 	@ApiOperation(value = "Upisuje proizvod u bazu podataka")
 	@PostMapping("proizvod")
-	@CrossOrigin
 	public ResponseEntity<Proizvod> insertProizvod(@RequestBody Proizvod proizvod){
 		if(!proizvodRepository.existsById(proizvod.getId())) {
 			proizvodRepository.save(proizvod);
@@ -77,7 +76,6 @@ public class ProizvodRestController {
 	
 	@ApiOperation(value = "Modifikuje postojeÄ‡i proizvod u bazi podataka")
 	@PutMapping("proizvod")
-	@CrossOrigin
 	public ResponseEntity<Proizvod> updateProizvod(@RequestBody Proizvod proizvod){
 		if(proizvodRepository.existsById(proizvod.getId())){
 			proizvodRepository.save(proizvod);
@@ -90,7 +88,6 @@ public class ProizvodRestController {
 	@Transactional
 	@ApiOperation(value = "BriÅ¡e proizvoda iz baze podataka Ä�iji je id vrednost prosleÄ‘ena kao path varijabla")
 	@DeleteMapping("proizvod/{id}")
-	@CrossOrigin
 	public ResponseEntity<Proizvod> deleteProizvod(@PathVariable Integer id){
 		if(proizvodRepository.existsById(id)) {
 			proizvodRepository.deleteById(id);

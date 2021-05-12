@@ -20,9 +20,9 @@ import io.swagger.annotations.ApiOperation;
 import rva.jpa.Proizvodjac;
 import rva.repository.ProizvodjacRepository;
 
-@CrossOrigin
 @Api(tags = {"ProizvoÄ‘aÄ� CRUD operacije"})
 @RestController
+@CrossOrigin
 public class ProizvodjacRestContorller {
 
 	@Autowired
@@ -63,7 +63,6 @@ public class ProizvodjacRestContorller {
 	
 	@ApiOperation(value = "Modifikuje postojeÄ‡eg proizvodjaÄ�a u bazi podataka")
 	@PutMapping("proizvodjac")
-	@CrossOrigin
 	public ResponseEntity<Proizvodjac> updateProizvodjac(@RequestBody Proizvodjac proizvodjac){
 		if(proizvodjacRepository.existsById(proizvodjac.getId())){
 			proizvodjacRepository.save(proizvodjac);
@@ -75,7 +74,6 @@ public class ProizvodjacRestContorller {
 	
 	@ApiOperation(value = "BriÅ¡e proizvodjaÄ�a iz baze podataka Ä�iji je id vrednost prosleÄ‘ena kao path varijabla")
 	@DeleteMapping("proizvodjac/{id}")
-	@CrossOrigin
 	public ResponseEntity<Proizvodjac> deleteProizvodjac(@PathVariable Integer id){
 		if(proizvodjacRepository.existsById(id)) {
 			proizvodjacRepository.deleteById(id);
