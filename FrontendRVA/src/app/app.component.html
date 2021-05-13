@@ -2,7 +2,7 @@
   <mat-sidenav mode="over" [fixedInViewport]="true" opened mode="side">
     <mat-accordion>
       <a mat-button style="text-align: center">
-        <mat-icon>Home</mat-icon>
+        <mat-icon [routerLink]="['/home']">Home</mat-icon>
       </a>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -12,13 +12,13 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <mat-nav-list>
-          <a mat-button>Proizvođac</a>
+          <a [routerLink]="['/proizvodjac']" mat-button>Proizvođac</a>
         </mat-nav-list>
         <mat-nav-list>
-          <a mat-button>Proizvod</a>
+          <a [routerLink]="['/proizvod']" mat-button>Proizvod</a>
         </mat-nav-list>
         <mat-nav-list>
-          <a mat-button>Račun</a>
+          <a [routerLink]="['/racun']" mat-button>Račun</a>
         </mat-nav-list>
       </mat-expansion-panel>
       <mat-expansion-panel>
@@ -29,15 +29,16 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <mat-nav-list>
-          <a mat-button>Početna</a>
+          <a [routerLink]="['/home']" mat-button>Početna</a>
         </mat-nav-list>
         <mat-nav-list>
-          <a mat-button>Autor</a>
+          <a [routerLink]="['/author']" mat-button>Autor</a>
         </mat-nav-list>
         <mat-nav-list>
-          <a mat-button>O nama</a>
+          <a [routerLink]="['/about']" mat-button>O nama</a>
         </mat-nav-list>
       </mat-expansion-panel>
     </mat-accordion>
   </mat-sidenav>
+  <router-outlet></router-outlet>
 </mat-sidenav-container>
