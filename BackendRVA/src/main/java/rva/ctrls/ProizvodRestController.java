@@ -39,7 +39,7 @@ public class ProizvodRestController {
 	private JdbcTemplate jdbcTemplate;
 
 	@ApiOperation(value = "VraÄ‡a kolekciju svih proizvoda iz baze podataka")
-	@GetMapping("proizvodi")
+	@GetMapping("proizvod")
 	public Collection<Proizvod> getProizvodi() {
 		return proizvodRepository.findAll();
 	}
