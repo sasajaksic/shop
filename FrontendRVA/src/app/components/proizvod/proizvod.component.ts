@@ -10,8 +10,9 @@ import { Proizvod } from 'src/app/models/proizvod';
 })
 export class ProizvodComponent implements OnInit {
 
-  displayedColumns = ['id', 'naziv', 'proizvodjac'];
+  displayedColumns = ['id', 'naziv', 'proizvodjac', 'actions'];
   dataSource: MatTableDataSource<Proizvod>;
+  selektovanProizvod: Proizvod;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -26,9 +27,30 @@ export class ProizvodComponent implements OnInit {
     this.proizvodService.getAllProizvod().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
 
+      this.dataSource.filterPredicate = (data, filter: string) => {
+        const accumulator = (currentTerm, key) => {
+          return key === 'proizvodjac' ? currentTerm + data.proizvodjac.naziv : currentTerm + data[key];
+        };
+        const dataStr = Object.keys(data).reduce(accumulator, '').toLowerCase();
+        const transformedFilter = filter.trim().toLowerCase();
+        return dataStr.indexOf(transformedFilter) !== -1;
+      };
+
+       //sortiranje po nazivu ugnježdenog objekta
+       this.dataSource.sortingDataAccessor = (data, property) => {
+        switch(property) {
+          case 'proizvodjac': return data.proizvodjac.naziv.toLocaleLowerCase();
+          default: return data[property];
+        }
+      };
+
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
+  }
+
+  selectRow(row: any) {
+    this.selektovanProizvod = row;
   }
 
   applayFilter(filterValue: string) {

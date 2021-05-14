@@ -10,7 +10,7 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 })
 export class RacunComponent implements OnInit {
 
-  displayedColumns = ['id', 'datum', 'nacinPlacanja'];
+  displayedColumns = ['id', 'datum', 'nacinPlacanja', 'actions'];
   dataSource: MatTableDataSource<Racun>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

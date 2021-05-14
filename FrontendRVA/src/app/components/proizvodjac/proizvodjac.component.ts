@@ -10,7 +10,7 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 })
 export class ProizvodjacComponent implements OnInit {
 
-  displayedColumns = ['id', 'adresa', 'kontakt', 'naziv'];
+  displayedColumns = ['id', 'adresa', 'kontakt', 'naziv', 'actions'];
   dataSource: MatTableDataSource<Proizvodjac>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
