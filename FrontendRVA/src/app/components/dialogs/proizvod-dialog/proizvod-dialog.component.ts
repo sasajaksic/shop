@@ -4,6 +4,7 @@ import { Proizvod } from './../../../models/proizvod';
 import { MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ProizvodService } from './../../../services/proizvod.service';
 import { Component, OnInit, Inject } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-proizvod-dialog',
@@ -28,9 +29,6 @@ export class ProizvodDialogComponent implements OnInit {
 
   compareTo(a, b) {
     return a.id = b.id;
-  }
-  onChange(proizvodjac) {
-    this.data.proizvodjac = proizvodjac;
   }
 
   public add(): void {

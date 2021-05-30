@@ -16,7 +16,7 @@ export class StavkaRacunaComponent implements OnInit, OnChanges {
   displayedColumns = ['id', 'cena', 'jedinicaMere', 'kolicina', 'redniBroj', 'proizvod', 'racun', 'actions'];
   dataSource: MatTableDataSource<StavkaRacuna>;
 
-  @Input() selektovanProizvod: Proizvod;
+  @Input() selektovanRacun: Racun;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -27,24 +27,15 @@ export class StavkaRacunaComponent implements OnInit, OnChanges {
   ngOnInit() {
   }
 
-  ngOnChanges() {
-    if(this.selektovanProizvod.id) {
+  ngOnChanges(): void {
+    if(this.selektovanRacun.id) {
       this.loadData();
     }
   }
 
   public loadData(){
-    this.stavkaRacunaService.getStavkeRacunaByProizvodId(this.selektovanProizvod.id).subscribe(data => {
+    this.stavkaRacunaService.stavkeRacunaByRacunId(this.selektovanRacun.id).subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
-
-      this.dataSource.filterPredicate = (data, filter: string) => {
-        const accumulator = (currentTerm, key) => {
-          return key === 'racun' ? currentTerm + data.racun.datum : currentTerm + data[key];
-        };
-        const dataStr = Object.keys(data).reduce(accumulator, '').toLowerCase();
-        const transformedFilter = filter.trim().toLowerCase();
-        return dataStr.indexOf(transformedFilter) !== -1;
-      };
 
       this.dataSource.filterPredicate = (data, filter: string) => {
         const accumulator = (currentTerm, key) => {
@@ -55,11 +46,9 @@ export class StavkaRacunaComponent implements OnInit, OnChanges {
         return dataStr.indexOf(transformedFilter) !== -1;
       };
 
-        //sortiranje po nazivu ugnježdenog objekta
         this.dataSource.sortingDataAccessor = (data, property) => {
         switch(property) {
           case 'proizvod': return data.proizvod.naziv.toLocaleLowerCase();
-          case 'racun': return data.racun.datum;
           default: return data[property];
         }
     }
@@ -73,14 +62,8 @@ export class StavkaRacunaComponent implements OnInit, OnChanges {
 
     dialogRef.componentInstance.flag = flag;
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if(result === 1) {
-    //     this.loadData();
-    //   }
-    // });
-
     if(flag===1) {
-      dialogRef.componentInstance.data.proizvod = this.selektovanProizvod;
+      dialogRef.componentInstance.data.racun = this.selektovanRacun;
     }
     dialogRef.afterClosed()
       .subscribe(result => {

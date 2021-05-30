@@ -14,7 +14,6 @@ export class ProizvodComponent implements OnInit {
 
   displayedColumns = ['id', 'naziv', 'proizvodjac', 'actions'];
   dataSource: MatTableDataSource<Proizvod>;
-  selektovanProizvod: Proizvod;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -39,7 +38,6 @@ export class ProizvodComponent implements OnInit {
         return dataStr.indexOf(transformedFilter) !== -1;
       };
 
-       //sortiranje po nazivu ugnježdenog objekta
        this.dataSource.sortingDataAccessor = (data, property) => {
         switch(property) {
           case 'proizvodjac': return data.proizvodjac.naziv.toLocaleLowerCase();
@@ -52,10 +50,6 @@ export class ProizvodComponent implements OnInit {
     });
   }
 
-  selectRow(row: any) {
-    this.selektovanProizvod = row;
-  }
-
   public openDialog(flag: number, id?: number, naziv?: string, proizvodjac?: Proizvodjac){
     const dialogRef = this.dialog.open(ProizvodDialogComponent, {data: {id, naziv, proizvodjac}});
 
@@ -66,6 +60,7 @@ export class ProizvodComponent implements OnInit {
         this.loadData();
       }
     });
+    console.log(proizvodjac.naziv  + "OVDE");
   }
 
   applayFilter(filterValue: string) {
@@ -73,5 +68,4 @@ export class ProizvodComponent implements OnInit {
     filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
   }
-
 }

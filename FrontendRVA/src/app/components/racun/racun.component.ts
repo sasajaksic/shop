@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { RacunDialogComponent } from './../dialogs/racun-dialog/racun-dialog.component';
 import { Racun } from './../../models/racun';
 import { RacunService } from './../../services/racun.service';
@@ -13,6 +14,7 @@ export class RacunComponent implements OnInit {
 
   displayedColumns = ['id', 'datum', 'nacinPlacanja', 'actions'];
   dataSource: MatTableDataSource<Racun>;
+  selektovanRacun: Racun;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -42,6 +44,11 @@ export class RacunComponent implements OnInit {
         this.loadData();
       }
     });
+  }
+
+  selectRow(row: any) {
+    this.selektovanRacun = row;
+    console.log(this.selektovanRacun);
   }
 
   applayFilter(filterValue: string) {

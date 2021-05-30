@@ -47,45 +47,25 @@
 
     <div class="form">
       <mat-form-field>
-        <input
-          matInput
-          placeholder="Račun"
-          [(ngModel)]="data.racun"
-          name="racun"
+        <mat-select
+          [(ngModel)]="data.proizvod"
+          placeholder="Proizvod"
+          name="proizvod"
+          [compareWith]="compareTo"
           [disabled]="flag == 3"
-        /><mat-option *ngFor="let racun of racuni" [value]="racun">
-          {{ racun.id }}
-        </mat-option>
-      </mat-form-field>
-    </div>
-    <!--
-    <div class="form">
-      <mat-form-field>
-        <mat-select [(ngModel)]="data.artikl" placeholder="Artikl" name="artikl" [compareWith]="compareTo" [disabled]="flag == 3">
-          <mat-option *ngFor="let artikl of artikli" [value]="artikl">
-            {{ artikl.naziv }}
+        >
+          <mat-option *ngFor="let proizvod of proizvodi" [value]="proizvod">
+            {{ proizvod.naziv }}
           </mat-option>
         </mat-select>
       </mat-form-field>
-    </div> -->
-
-    <!-- <div class="form">
-      <mat-form-field>
-        <input
-          matInput
-          placeholder="Proizvod"
-          [(ngModel)]="data.proizvod"
-          name="proizvod"
-          [disabled]="flag == 3"
-        />
-      </mat-form-field>
-    </div> -->
+    </div>
 
     <div mat-dialog-actions>
       <button
         mat-button
         *ngIf="flag == 1"
-        [type]="submit"
+        type="submit"
         [mat-dialog-close]="1"
         (click)="add()"
         [disabled]="!formControl.valid"
@@ -95,7 +75,7 @@
       <button
         mat-button
         *ngIf="flag == 2"
-        [type]="submit"
+        type="submit"
         [mat-dialog-close]="1"
         (click)="update()"
         [disabled]="!formControl.valid"
@@ -105,7 +85,7 @@
       <button
         mat-button
         *ngIf="flag == 3"
-        [type]="submit"
+        type="submit"
         [mat-dialog-close]="1"
         (click)="delete()"
       >

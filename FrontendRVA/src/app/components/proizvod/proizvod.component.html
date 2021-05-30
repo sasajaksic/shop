@@ -40,7 +40,7 @@
         <button
           mat-icon-button
           color="primary"
-          (click)="openDialog(2, row.id, row.naziv, row.proizvodjac.naziv)"
+          (click)="openDialog(2, row.id, row.naziv, row.proizvodjac)"
         >
           <mat-icon aria-label="Edit">edit</mat-icon>
         </button>
@@ -48,7 +48,7 @@
         <button
           mat-icon-button
           color="primary"
-          (click)="openDialog(3, row.id, row.naziv, row.proizvodjac.naziv)"
+          (click)="openDialog(3, row.id, row.naziv, row.proizvodjac)"
         >
           <mat-icon aria-label="Delete">delete</mat-icon>
         </button>
@@ -59,7 +59,6 @@
     <mat-row
       style="cursor: default"
       *matRowDef="let row; columns: displayedColumns"
-      (click)="selectRow(row)"
     ></mat-row>
   </mat-table>
 
@@ -69,11 +68,4 @@
     [showFirstLastButtons]="true"
   >
   </mat-paginator>
-</div>
-<div class="container mat-elevation-z8">
-  <app-stavka-racuna
-    *ngIf="selektovanProizvod"
-    [selektovanProizvod]="selektovanProizvod"
-  >
-  </app-stavka-racuna>
 </div>

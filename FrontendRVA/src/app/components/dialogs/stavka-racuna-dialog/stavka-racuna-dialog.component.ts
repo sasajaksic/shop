@@ -1,7 +1,9 @@
+import { ProizvodService } from './../../../services/proizvod.service';
+import { Proizvod } from 'src/app/models/proizvod';
 import { StavkaRacunaService } from './../../../services/stavka-racuna.service';
 import { MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { StavkaRacuna } from './../../../models/stavkaRacuna';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-stavka-racuna-dialog',
@@ -10,14 +12,23 @@ import { Component, OnInit, Inject } from '@angular/core';
 })
 export class StavkaRacunaDialogComponent implements OnInit {
 
+  proizvodi: Proizvod[];
   public flag: number;
 
   constructor(public stavkaRacunaService: StavkaRacunaService,
               public snackBar: MatSnackBar,
               public dialogRef: MatDialogRef<StavkaRacunaDialogComponent>,
-              @Inject (MAT_DIALOG_DATA) public data: StavkaRacuna) { }
+              @Inject (MAT_DIALOG_DATA) public data: StavkaRacuna,
+              public proizvodService: ProizvodService) { }
 
   ngOnInit() {
+    this.proizvodService.getAllProizvod().subscribe(proizvodi =>
+      this.proizvodi = proizvodi
+    );
+  }
+
+  compareTo(a, b) {
+    return a.id === b.id;
   }
 
   public add(): void {
@@ -48,5 +59,4 @@ export class StavkaRacunaDialogComponent implements OnInit {
       duration: 500
     });
   }
-
 }

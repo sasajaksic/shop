@@ -9,14 +9,14 @@ import { Injectable } from '@angular/core';
 export class StavkaRacunaService {
 
   private readonly API_URL = "http://localhost:8083/stavkaRacuna/";
-  private readonly API_URL_BTID = "http://localhost:8083/stavkeRacunaByProizvodId/";
+  private readonly API_URL_BYID = "http://localhost:8083/stavkeRacunaByRacunId/";
 
   dataChange: BehaviorSubject<StavkaRacuna[]> = new BehaviorSubject<StavkaRacuna[]>([]);
 
   constructor(private httpClient: HttpClient) { }
 
-  public getStavkeRacunaByProizvodId(idProizvoda): Observable<StavkaRacuna[]> {
-    this.httpClient.get<StavkaRacuna[]>(this.API_URL_BTID + idProizvoda).subscribe(data => {
+  public stavkeRacunaByRacunId(idRacuna): Observable<StavkaRacuna[]> {
+    this.httpClient.get<StavkaRacuna[]>(this.API_URL_BYID + idRacuna).subscribe(data => {
       this.dataChange.next(data);
     },
     (error: HttpErrorResponse) => {

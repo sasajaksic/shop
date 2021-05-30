@@ -59,8 +59,9 @@
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row
-      style="cursor: default"
+      style="cursor: pointer"
       *matRowDef="let row; columns: displayedColumns"
+      (click)="selectRow(row)"
     ></mat-row>
   </mat-table>
 
@@ -70,4 +71,10 @@
     [showFirstLastButtons]="true"
   >
   </mat-paginator>
+</div>
+<div class="container mat-elevation-z8">
+  <app-stavka-racuna
+    *ngIf="selektovanRacun"
+    [selektovanRacun]="selektovanRacun"
+  ></app-stavka-racuna>
 </div>
