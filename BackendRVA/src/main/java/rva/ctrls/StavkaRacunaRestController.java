@@ -71,7 +71,7 @@ public class StavkaRacunaRestController {
 	}
 	
 	@ApiOperation(value = "VraÄ‡a kolekciju stavki raÄ�una iz baze podataka na osnovu racuna Ä�ija je id vrednost prosleÄ‘ena kao path varijabla")
-	@GetMapping ("stavkeByRacunId/{id}")
+	@GetMapping ("stavkeRacunaByRacunId/{id}")
 	public Collection<StavkaRacuna> stavkaPoRacunuId (@PathVariable("id") int id) {
 		Racun r = racunRepository.getOne(id);
 		return stavkaRacunaRepository.findByRacun(r);
