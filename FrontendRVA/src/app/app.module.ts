@@ -1,7 +1,3 @@
-import { MatFormFieldModule, MatNativeDateModule, MatCheckboxModule, MatDatepickerModule, MatPaginatorModule, MatSortModule, MatCell } from '@angular/material';
-
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { ProizvodjacComponent } from './components/proizvodjac/proizvodjac.component';
 import { ProizvodComponent } from './components/proizvod/proizvod.component';
@@ -11,11 +7,17 @@ import { AboutComponent } from './components/core/about/about.component';
 import { AuthorComponent } from './components/core/author/author.component';
 import { HomeComponent } from './components/core/home/home.component';
 
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RacunDialogComponent } from './components/dialogs/racun-dialog/racun-dialog.component';
+import { ProizvodDialogComponent } from './components/dialogs/proizvod-dialog/proizvod-dialog.component';
+import { ProizvodjacDialogComponent } from './components/dialogs/proizvodjac-dialog/proizvodjac-dialog.component';
+import { StavkaRacunaDialogComponent } from './components/dialogs/stavka-racuna-dialog/stavka-racuna-dialog.component';
 
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatButtonModule,
           MatIconModule,
@@ -29,12 +31,14 @@ import { MatButtonModule,
           MatOptionModule,
           MatDialogModule,
           MatInputModule,
-          MatSnackBarModule}
+          MatSnackBarModule,
+          MatFormFieldModule,
+          MatNativeDateModule,
+          MatCheckboxModule,
+          MatDatepickerModule,
+          MatPaginatorModule,
+          MatSortModule}
 from '@angular/material';
-
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
-
 
 const Routes = [
   { path: 'proizvod', component: ProizvodComponent },
@@ -55,7 +59,11 @@ const Routes = [
     StavkaRacunaComponent,
     HomeComponent,
     AuthorComponent,
-    AboutComponent
+    AboutComponent,
+    RacunDialogComponent,
+    ProizvodDialogComponent,
+    ProizvodjacDialogComponent,
+    StavkaRacunaDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -81,9 +89,16 @@ const Routes = [
     MatDatepickerModule,
     MatPaginatorModule,
     MatSortModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
+  entryComponents: [
+    RacunDialogComponent,
+    ProizvodjacDialogComponent,
+    ProizvodDialogComponent,
+    StavkaRacunaDialogComponent
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

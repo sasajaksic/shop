@@ -27,6 +27,7 @@ export class StavkaRacunaService {
   }
 
   public addStavkaRacuna(stavkaRacuna: StavkaRacuna): void {
+    stavkaRacuna.id = 0;
     this.httpClient.post(this.API_URL, stavkaRacuna).subscribe();
   }
 

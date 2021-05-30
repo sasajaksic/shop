@@ -1,7 +1,8 @@
+import { RacunDialogComponent } from './../dialogs/racun-dialog/racun-dialog.component';
 import { Racun } from './../../models/racun';
 import { RacunService } from './../../services/racun.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-racun',
@@ -16,7 +17,8 @@ export class RacunComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private racunService: RacunService) { }
+  constructor(private racunService: RacunService,
+              private dialog: MatDialog) { }
 
   ngOnInit() {
     this.loadData();
@@ -28,6 +30,17 @@ export class RacunComponent implements OnInit {
 
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+    });
+  }
+
+  public openDialog(flag: number, id?: number, datum?: Date, nacinPlacanja?: string){
+    const dialogRef = this.dialog.open(RacunDialogComponent, {data: {id, datum, nacinPlacanja}});
+    dialogRef.componentInstance.flag = flag;
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result === 1) {
+        this.loadData();
+      }
     });
   }
 

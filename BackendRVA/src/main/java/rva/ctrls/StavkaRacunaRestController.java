@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import rva.jpa.Proizvod;
+import rva.jpa.Racun;
 import rva.jpa.StavkaRacuna;
 import rva.repository.ProizvodRepository;
+import rva.repository.RacunRepository;
 import rva.repository.StavkaRacunaRepository;
 
 
@@ -36,6 +38,9 @@ public class StavkaRacunaRestController {
 	
 	@Autowired
 	private ProizvodRepository proizvodRepository;
+	
+	@Autowired
+	private RacunRepository racunRepository;
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -63,6 +68,13 @@ public class StavkaRacunaRestController {
 	public Collection<StavkaRacuna> getStavkeRacunaByProizvodId(@PathVariable("id") Integer id){
 		Proizvod p = proizvodRepository.getOne(id);
 		return stavkaRacunaRepository.findByProizvod(p);
+	}
+	
+	@ApiOperation(value = "VraÄ‡a kolekciju stavki raÄ�una iz baze podataka na osnovu racuna Ä�ija je id vrednost prosleÄ‘ena kao path varijabla")
+	@GetMapping ("stavkeByRacunId/{id}")
+	public Collection<StavkaRacuna> stavkaPoRacunuId (@PathVariable("id") int id) {
+		Racun r = racunRepository.getOne(id);
+		return stavkaRacunaRepository.findByRacun(r);
 	}
 	
 	@ApiOperation(value = "VraÄ‡a kolekciju stavki raÄ�una iz baze podataka na osnovu cene Ä�ija je vrednost prosleÄ‘ena kao path varijabla")

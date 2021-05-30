@@ -26,15 +26,16 @@ export class RacunService {
   }
 
   public addRacun(racun: Racun): void {
-    this.httpClient.post(this.API_URL, racun);
+    racun.id = 0;
+    this.httpClient.post(this.API_URL, racun).subscribe();
   }
 
   public updateRacun(racun: Racun): void {
-    this.httpClient.put(this.API_URL, racun);
+    this.httpClient.put(this.API_URL, racun).subscribe();
   }
 
   public deleteRacun(id: number): void {
     console.log(this.API_URL + id);
-    this.httpClient.delete(this.API_URL + id);
+    this.httpClient.delete(this.API_URL + id).subscribe();
   }
 }

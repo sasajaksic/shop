@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { AuthorComponent } from './components/core/author/author.component';
 import { AboutComponent } from './components/core/about/about.component';
 import { HomeComponent } from './components/core/home/home.component';
@@ -19,7 +20,7 @@ const Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(Routes)],
+  imports: [RouterModule.forRoot(Routes), FormsModule],
   exports: [RouterModule]
 })
 

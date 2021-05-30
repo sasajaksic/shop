@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import rva.jpa.Proizvod;
+import rva.jpa.Racun;
 import rva.jpa.StavkaRacuna;
 
 public interface StavkaRacunaRepository extends JpaRepository<StavkaRacuna, Integer>{
@@ -14,6 +15,8 @@ public interface StavkaRacunaRepository extends JpaRepository<StavkaRacuna, Inte
 	Collection<StavkaRacuna> findByJedinicaMereIgnoreCase(String jedinicaMere);
 	
 	Collection<StavkaRacuna> findByProizvod(Proizvod proizvod);
+	
+	Collection<StavkaRacuna> findByRacun(Racun racun);
 	
 	Collection<StavkaRacuna> findByCenaLessThanOrderById(BigDecimal cena);
 	

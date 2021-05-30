@@ -26,15 +26,16 @@ export class ProizvodService {
   }
 
   public addProizvod(proizvod: Proizvod): void {
-    this.httpClient.post(this.API_URL, proizvod);
+    proizvod.id = 0;
+    this.httpClient.post(this.API_URL, proizvod).subscribe();
   }
 
   public updateProizvod(proizvod: Proizvod): void {
-    this.httpClient.put(this.API_URL, proizvod);
+    this.httpClient.put(this.API_URL, proizvod).subscribe();
   }
 
   public deleteProizvod(id: number): void {
     console.log(this.API_URL + id);
-    this.httpClient.delete(this.API_URL + id);
+    this.httpClient.delete(this.API_URL + id).subscribe();
   }
 }
