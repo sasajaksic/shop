@@ -87,7 +87,7 @@ public class StavkaRacunaRestController {
 	@PostMapping("stavkaRacuna")
 	public ResponseEntity<StavkaRacuna> insertStavkaRacuna(@RequestBody StavkaRacuna stavkaRacuna){
 		if(!stavkaRacunaRepository.existsById(stavkaRacuna.getId())) {
-			stavkaRacuna.setRedniBroj(stavkaRacunaRepository.nextRbr(stavkaRacuna.getProizvod().getId()));
+			stavkaRacuna.setRedniBroj(stavkaRacunaRepository.nextRbr(stavkaRacuna.getRacun().getId()));
 			stavkaRacunaRepository.save(stavkaRacuna);
 			return new ResponseEntity<StavkaRacuna>(HttpStatus.OK);
 		} else {
