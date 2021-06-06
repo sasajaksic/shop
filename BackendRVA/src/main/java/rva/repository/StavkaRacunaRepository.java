@@ -20,6 +20,7 @@ public interface StavkaRacunaRepository extends JpaRepository<StavkaRacuna, Inte
 	
 	Collection<StavkaRacuna> findByCenaLessThanOrderById(BigDecimal cena);
 	
-	@Query(value = "select coalesce(max(redni_broj)+1, 1) from stavka_racuna where proizvod = ?1", nativeQuery = true)
+	@Query(value = "select coalesce(max(redni_broj)+1, 1) from stavka_racuna where racun = ?1", nativeQuery = true)
 	Integer nextRbr(Integer id);
+
 }
